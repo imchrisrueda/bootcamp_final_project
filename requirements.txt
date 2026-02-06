@@ -1,0 +1,50 @@
+# Dependencias para pipeline de generación sintética de imágenes de Sorghum con LoRA
+
+# Deep Learning y modelos generativos
+torch>=2.1.0
+torchvision>=0.16.0
+diffusers>=0.26.0
+transformers>=4.37.0
+accelerate>=0.26.0
+peft>=0.8.0
+safetensors>=0.4.0
+
+# xformers (opcional, mejora performance)
+# xformers>=0.0.23  # Descomentar si GPU soporta (requiere compilación específica)
+
+# Procesamiento de imágenes
+Pillow>=10.2.0
+opencv-python>=4.9.0
+albumentations>=1.3.1
+imageio>=2.33.0
+
+# Métricas de evaluación
+pytorch-fid>=0.3.0
+torchmetrics>=1.3.0
+scikit-image>=0.22.0
+scipy>=1.12.0
+lpips>=0.1.4
+
+# Utilidades científicas
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Visualización
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Progress tracking
+tqdm>=4.66.0
+
+# Configuración y serialización
+pyyaml>=6.0.1
+
+# Logging y monitoreo
+tensorboard>=2.15.0
+# wandb>=0.16.0  # Opcional: descomentar para tracking cloud
+
+# Machine Learning auxiliar
+scikit-learn>=1.4.0
+
+# Herramientas de sistema
+psutil>=5.9.0

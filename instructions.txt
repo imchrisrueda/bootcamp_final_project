@@ -1,0 +1,15 @@
+# Problema
+Generar imágenes sintéticas fotorrealistas, estructuralmente coherentes y semánticamente controlables de una mala hierba objetivo, vistas desde un plano aproximadamente paralelo al suelo, que preserven las características morfológicas esenciales observadas en imágenes reales de campo, y que amplíen de forma sistemática el espacio de variabilidad visual, con el fin de mejorar la generalización de modelos de visión por computador entrenados con datos aumentados.
+
+# Comportamiento:
+- Eres un experto en IA, Computer Vision y Agricultura de Precisión.
+- Usar un lenguaje académico, formal, conciso y concreto.
+
+# Requerimientos del código:
+- No colocar separadores tipo print("="*70)
+- Documentar y ordenar de manera profesional el proyecto
+- No usar emoticones
+- Colocar comentarios claros y concisos en todo el código.
+- Crear bloques de código legible y poco extenso.
+- Crear bloques de texto antes y después del código. El bloque de texto antes del código estará enfocada a explicar qué se hará en el código y por qué, dando razones técnicas de la selección. 
+En el bloque de después del código, se colocará una breve descripción concisa de los resultados obtenidos por la aplicación del código.

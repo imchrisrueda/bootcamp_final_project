@@ -1,0 +1,127 @@
+# Configuración del pipeline de generación sintética de Sorghum
+
+# Rutas del proyecto
+paths:
+  raw_data: "./imgs"
+  processed_data: "./data/processed"
+  splits: "./data/splits"
+  models: "./models"
+  outputs: "./outputs"
+  logs: "./logs"
+
+# Configuración de datos
+data:
+  target_species: "sorghum"
+  regularization_species: "maize"
+  image_size: 512
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+  seed: 42
+
+# Preprocesamiento
+preprocessing:
+  resize_mode: "pad"  # pad, crop, stretch
+  padding_color: [0, 0, 0]
+  normalize: true
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+# Regularización con Maize
+regularization:
+  enabled: true
+  num_maize_images: 300
+  sorghum_ratio: 0.85
+  maize_ratio: 0.15
+  class_preservation_weight: 0.3
+  sampling_mode: "random"  # random, balanced_phases
+
+# Entrenamiento LoRA
+lora:
+  base_model: "runwayml/stable-diffusion-v1-5"
+  rank: 32
+  alpha: 32
+  dropout: 0.0
+  target_modules: ["to_q", "to_k", "to_v", "to_out.0"]
+  
+training:
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 1.0e-4
+  lr_scheduler: "cosine"
+  lr_warmup_steps: 500
+  num_train_epochs: 12
+  max_train_steps: 2500
+  mixed_precision: "fp16"
+  gradient_checkpointing: true
+  
+  # Augmentación on-the-fly
+  augmentation:
+    horizontal_flip: true
+    vertical_flip: true
+    rotation_range: 15
+    brightness_range: 0.15
+    contrast_range: 0.15
+    saturation_range: 0.10
+  
+  # Prompts especializados
+  prompts:
+    instance_prompt: "aerial drone photograph of sorghum weed from 11 meters height, agricultural field, top-down view, high detail"
+    class_prompt: "aerial drone photograph of crop field from above, agricultural landscape"
+  
+  # Checkpointing
+  save_steps: 500
+  validation_steps: 250
+  logging_steps: 50
+
+# Generación sintética
+generation:
+  num_images: 5000
+  batch_size: 8
+  inference_steps: 40
+  guidance_scale: 7.5
+  
+  # Variabilidad sistemática
+  variations:
+    lighting:
+      - "morning golden hour light"
+      - "midday bright sunlight"
+      - "afternoon soft shadows"
+      - "overcast diffuse lighting"
+    soil_texture:
+      - "clay soil texture"
+      - "sandy soil texture"
+      - "loam soil texture"
+      - "bare agricultural soil"
+    density:
+      - "sparse vegetation"
+      - "moderate plant density"
+      - "dense weed coverage"
+    growth_stage:
+      - "early seedling stage"
+      - "vegetative growth stage"
+      - "mature plant stage"
+
+# Evaluación y filtrado
+evaluation:
+  metrics:
+    - "fid"
+    - "inception_score"
+    - "ssim_diversity"
+  
+  classifier:
+    model: "efficientnet_b0"
+    confidence_threshold: 0.90
+    num_classes: 3  # sorghum, maize, atriplex
+  
+  filtering:
+    enable_quality_filter: true
+    enable_artifact_detection: true
+    ssim_clustering_threshold: 0.95
+    final_synthetic_count: 4000
+
+# Configuración de hardware
+hardware:
+  device: "cuda"
+  num_workers: 4
+  pin_memory: true
