@@ -10,7 +10,7 @@ peft>=0.8.0
 safetensors>=0.4.0
 
 # xformers (opcional, mejora performance)
-# xformers>=0.0.23  # Descomentar si GPU soporta (requiere compilación específica)
+xformers>=0.0.23  # Descomentar si GPU soporta (requiere compilación específica)
 
 # Procesamiento de imágenes
 Pillow>=10.2.0
